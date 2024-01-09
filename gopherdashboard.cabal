@@ -5,7 +5,7 @@ cabal-version: 1.12
 -- see: https://github.com/sol/hpack
 
 name:           gopherdashboard
-version: 0.4.0.0
+version: 0.5.0.0
 description:    Please see the README on GitHub at <https://github.com/someodd/gopherdashboard#readme>
 homepage:       https://github.com/someodd/gopherdashboard#readme
 bug-reports:    https://github.com/someodd/gopherdashboard/issues
