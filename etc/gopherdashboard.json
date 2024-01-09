@@ -1,0 +1,92 @@
+{
+	"serverHost": "10.1.0.1",
+	"serverPort": 7000,
+	"serverRoot": "/var/gopherdashboard",
+	"serverForceRoot": false,
+	"serverAllowQuery": true,
+	"serverSwitchUser": "gopherdashboard",
+	"previewLinesMax": 10,
+	"dateFormat": "%Y-%m-%d %H:%M:%S",
+	"indicatorCommands": [
+			{
+					"indicatorLabel": "Uptime",
+					"indicatorCmd": "uptime --pretty"
+			},
+			{
+					"indicatorLabel": "Laptop Backup Age",
+					"indicatorCmd": "echo $((($(date +%s) - $(date -r /backups/someuser +%s)) / 86400)) \"days\""
+			},
+			{
+				"indicatorLabel": "Server Backup Age",
+				"indicatorCmd": "echo $((($(date +%s) - $(date -r /backups/server +%s)) / 86400)) \"days\""
+			}
+	],
+	"outputCommands": [
+			{
+					"outputLabel": "Wireguard",
+					"outputCmd": "wg show"
+			},
+			{
+					"outputLabel": "Debian Security",
+					"outputCmd": "curl -s 'https://www.debian.org/security/dsa-long' | grep -oPm10 '<title>\K.*?(?=</title>)'"
+			},
+			{
+					"outputLabel": "Debian News",
+					"outputCmd": "curl -s 'https://www.debian.org/News/news' | grep -oPm10 '<title>\K.*?(?=</title>)'"
+			},
+			{
+					"outputLabel": "Bits from Debian",
+					"outputCmd": "curl -s 'https://bits.debian.org/feeds/atom.xml' | grep -oPm10 '<title>\K.*?(?=</title>)'"
+			}
+	],
+	"menuCommands": [
+			{
+					"cmdResponseFile": "dashboard",
+					"cmdResponseType": "CommandMenuResponse",
+					"cmdRoute": "/regenerate",
+					"cmdName": "Regenerate Dashboard",
+					"cmd": "/usr/local/bin/gopherdashboard generate /etc/gopherdashboard.json > dashboard"
+			},
+			{
+					"cmdResponseFile": "status.log",
+					"cmdResponseType": "CommandQueryResponse",
+					"cmdRoute": "/status",
+					"cmdName": "Service Status",
+					"cmd": "service %s status > status.log"
+			},
+			{
+					"cmdResponseFile": "disk-usage-summary.log",
+					"cmdResponseType": "CommandFileResponse",
+					"cmdRoute": "/disk",
+					"cmdName": "Disk Usage",
+					"cmd": "df -h > disk-usage-summary.log"
+			}
+	],
+	"logs": [
+			{
+					"name": "apcupsd - UPS Events",
+					"path": "/var/log/apcupsd.events",
+					"previewCmd": "tail %s"
+			},
+			{
+					"name": "debsecan - the Debian Security Analyzer",
+					"path": "/var/log/debsecan/report.log",
+					"previewCmd": "echo \"CVEs found: $(cat %s | grep '^CVE-' | wc -l)\""
+			},
+			{
+					"name": "chkrootkit - locally checks for signs of a rootkit",
+					"path": "/var/log/chkrootkit.log",
+					"previewCmd": "grep -E 'WARNING|infected' %s | grep -v 'not infected'"
+			},
+			{
+					"name": "restic - backup log",
+					"path": "/var/log/restic-backup.log",
+					"previewCmd": "/usr/bin/tail %s"
+			},
+			{
+					"name": "restic - maintain log",
+					"path": "/var/log/restic-maintain.log",
+					"previewCmd": "cat %s | grep 'errors'"
+			}
+	]
+}

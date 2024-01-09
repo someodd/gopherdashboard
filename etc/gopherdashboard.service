@@ -1,0 +1,11 @@
+[Unit]
+Description=gopherdashboard Gopher Protocol Daemon
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/gopherdashboard serve /etc/gopherdashboard.json
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

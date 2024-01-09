@@ -1,0 +1,46 @@
+{
+	"serverHost": "localhost",
+	"serverPort": 7000,
+	"serverRoot": "./",
+	"serverForceRoot": false,
+	"previewLinesMax": 10,
+	"serverAllowQuery": true,
+	"dateFormat": "%Y-%m-%d %H:%M:%S",
+	"menuCommands":
+		[
+			{
+				"cmdResponseFile": "dashboard",
+				"cmdResponseType": "CommandMenuResponse",
+				"cmdRoute": "/regenerate",
+				"cmdName": "Regenerate Dashboard",
+				"cmd": "cabal run gopherdashboard -- generate etc/gopherdashboard.testing.json > dashboard"
+			},
+			{
+				"cmdResponseFile": "status.log",
+				"cmdResponseType": "CommandQueryResponse",
+				"cmdRoute": "/status",
+				"cmdName": "Service Status",
+				"cmd": "service %s status > status.log"
+			}
+		],
+	"indicatorCommands": [
+			{
+				"indicatorLabel": "Uptime",
+				"indicatorCmd": "uptime --pretty"
+			}
+		],
+	"outputCommands": [
+			{
+					"outputLabel": "Wireguard",
+					"outputCmd": "wg show"
+			}
+		],
+	"logs":
+		[
+			{
+				"name": "Source code which generated this file",
+				"path": "app/Main.hs",
+				"previewCmd": "tail %s"
+			}
+		]
+}

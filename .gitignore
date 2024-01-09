@@ -1,0 +1,9 @@
+dist-newstyle/
+*.swp
+dashboard
+querytest.log
+result/
+result
+gopherdashboard-deb/
+*.deb
+gopherdashboard-*.zip

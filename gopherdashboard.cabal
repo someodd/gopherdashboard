@@ -1,0 +1,46 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.36.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:           gopherdashboard
+version: 0.4.0.0
+description:    Please see the README on GitHub at <https://github.com/someodd/gopherdashboard#readme>
+homepage:       https://github.com/someodd/gopherdashboard#readme
+bug-reports:    https://github.com/someodd/gopherdashboard/issues
+author:         Someodd
+maintainer:     someodd@pm.me
+copyright:      2023 Someodd
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+source-repository head
+  type: git
+  location: https://github.com/someodd/gopherdashboard
+
+executable gopherdashboard-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_gopherdashboard
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base,
+      aeson,
+      process,
+      bytestring,
+      split,
+      optparse-applicative,
+      directory,
+      unix,
+      time,
+      filepath,
+      time,
+      spacecookie
+  default-language: GHC2021

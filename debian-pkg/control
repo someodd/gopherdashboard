@@ -1,0 +1,8 @@
+Package: gopherdashboard
+Version: 0.4.0.0
+Section: web
+Priority: optional
+Architecture: amd64
+Depends: libc6 (>= 2.28)
+Maintainer: someodd <someodd@pm.me>
+Description: Server monitoring through Gopher protocol

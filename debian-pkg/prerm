@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+
+# Check if systemctl is available
+if [ -x "/bin/systemctl" ]; then
+    # Check if the service exists
+    if systemctl list-units --full -all | grep -Fq 'gopherdashboard.service'; then
+        # Stop and disable the service
+        systemctl stop gopherdashboard.service
+        systemctl disable gopherdashboard.service
+        # Reload systemd to update its state
+        systemctl daemon-reload
+    fi
+fi
+
+deluser gopherdashboard
+

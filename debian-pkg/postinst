@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+useradd --no-create-home --shell /usr/sbin/nologin gopherdashboard
+chown -R gopherdashboard:gopherdashboard /var/gopherdashboard
+chmod 770 /var/gopherdashboard
+
+# Reload systemd to recognize new service
+systemctl daemon-reload
+
+# Enable and start the service
+systemctl enable gopherdashboard.service
+systemctl start gopherdashboard.service
